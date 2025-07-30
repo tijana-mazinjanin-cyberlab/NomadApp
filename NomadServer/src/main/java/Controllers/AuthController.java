@@ -4,7 +4,7 @@ import DTO.LoginDTO;
 import DTO.UserRegistrationDTO;
 import DTO.UserTokenState;
 import Services.ConfirmationTokenService;
-import Services.MailService;
+//import Services.MailService;
 import Services.UserService;
 import exceptions.ResourceConflictException;
 import model.*;
@@ -51,8 +51,8 @@ public class AuthController {
     private UserService userService;
     @Autowired
     private ConfirmationTokenService confirmationTokenService;
-    @Autowired
-    MailService mailService;
+//    @Autowired
+//    MailService mailService;
 
     @PostMapping("/login")
     public ResponseEntity<UserTokenState> createAuthenticationToken(
