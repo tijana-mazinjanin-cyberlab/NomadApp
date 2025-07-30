@@ -1,0 +1,20 @@
+<div class="flex gap-6 items-center mt-8">
+  <p class="text-white font-extrabold text-lg bg-nomad-dark rounded-full px-5 py-3">T</p>
+  <p class="text-gray-600 font-mono font-bold ">Hosted by Tijana</p>
+
+  <button (click)="showReportForm()" class="w-52 py-2 bg-gray-300 text-nomad-dark font-mono rounded-2xl font-bold text-md">Report host</button>
+  <button (click)="showRateForm()" class="w-52 py-2 bg-gray-300 text-nomad-dark font-mono rounded-2xl font-bold text-md">Leave a comment</button>
+</div>
+
+<div *ngIf="reportFormVisible" class="shadow-lg border-2 border-gray-100 rounded-md m-auto mt-4 mb-4 w-[97%]">
+  <mat-form-field class = "comment-field">
+    <mat-label>Report reason</mat-label>
+    <input matInput placeholder="Why are you reporting this host?" [(ngModel)] = "reportReason">
+  </mat-form-field>
+<!--  <textarea [(ngModel)]="reportReason" class="block shadow-2xl shadow-gray-300 w-96 rounded-md focus:border-gray-300 py-3.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-nomad-dark sm:text-sm sm:leading-6 " placeholder="Why are you reporting this host?"></textarea>-->
+  <button (click)="reportUser()" class="underline text-nomad-dark font-bold text-md">Report</button>
+</div>
+
+<app-accommodation-comment-form *ngIf="ratingFormVisible" [ratingType]="'host'" [hostId]="hostId" (newCommentEvent) = "getCommentsHost()" ></app-accommodation-comment-form>
+
+<app-accommodation-comments [reviews] = "reviewsHost"></app-accommodation-comments>

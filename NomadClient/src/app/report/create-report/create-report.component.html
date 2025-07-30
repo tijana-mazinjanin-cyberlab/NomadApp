@@ -1,0 +1,54 @@
+<div class="flex flex-col ml-20  mr-20 mt-5">
+  <div class="flex justify-center flex-row">
+    <div class="flex flex-col p-10">
+      <h3 class="p-5">Choose report type</h3>
+        <mat-radio-group [(ngModel)]="reportType" aria-label="Select an option">
+          <mat-radio-button value="ALL">All accommodations</mat-radio-button>
+          <mat-radio-button value="ONE">Monthly for one accommodation</mat-radio-button>
+        </mat-radio-group>
+      <h3 *ngIf="reportType == 'ONE'" class="p-5">Choose report type</h3>
+      <mat-form-field *ngIf="reportType == 'ONE'">
+        <mat-label>Accommodations</mat-label>
+        <mat-select [(ngModel)]="accommodationId" name="food">
+          <mat-option *ngFor="let accommodation of accommodations" [value]="accommodation.id">{{accommodation.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="pb-10" *ngIf="reportType == 'ONE'" subscriptSizing="dynamic">
+        <mat-label>
+          Year</mat-label>
+        <input [(ngModel)]="year" type="number"
+               placeholder="Enter year"
+               aria-label="Who"
+               matInput
+               value="2024"
+               min="2000">
+      </mat-form-field>
+      <div *ngIf="reportType == 'ALL'" class="p-10">
+        <h3 class="pb-5">Select date range</h3>
+        <mat-form-field subscriptSizing="dynamic">
+          <mat-label>
+            When</mat-label>
+          <mat-date-range-input [rangePicker]="picker" >
+            <input [(ngModel)]="fromDate" matStartDate placeholder="Start date">
+            <input [(ngModel)]="toDate" matEndDate placeholder="End date">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+      </div>
+      <button *ngIf="reportType == 'ALL'" (click)="submitForDateRange()" class="rounded-3xl bg-nomad-darker text-white text-lg p-3 pl-6 pr-6 shadow-2xl">
+        Submit</button>
+      <button *ngIf="reportType == 'ONE'" (click)="submitForOne()" class="rounded-3xl bg-nomad-darker text-white text-lg p-3 pl-6 pr-6 shadow-2xl">
+        Submit</button>
+    </div>
+    <div class="flex flex-row p-10">
+      <div class="col-4">
+        <canvas id="line_chart" width="400px" height="400px"></canvas>
+      </div>
+    </div>
+  </div>
+  <button *ngIf="reportType == 'ALL'" (click)="generateForDateRange()" class="rounded-3xl bg-nomad-gray2 text-white text-lg p-3 pl-6 pr-6 shadow-2xl">
+    + Generate pdf</button>
+  <button *ngIf="reportType == 'ONE'" (click)="generateForMonthly()" class="rounded-3xl bg-nomad-gray2 text-white text-lg p-3 pl-6 pr-6 shadow-2xl">
+    + Generate pdf</button>
+</div>

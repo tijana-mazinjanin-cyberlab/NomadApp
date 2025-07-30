@@ -1,0 +1,15 @@
+.userCard{
+    display: flex;
+    flex-flow: row wrap;
+    padding: 5%;
+    width: 80%;
+  /* Then we define how is distributed the remaining space */
+    justify-content: space-between;
+}
+.nomad-button{
+    background-color:#F4F4F4;
+    color:#551B14!important;
+    border-radius: 25px;
+    margin-left:2%;
+    padding:3%;
+}

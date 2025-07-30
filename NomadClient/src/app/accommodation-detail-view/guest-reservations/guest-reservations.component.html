@@ -1,0 +1,54 @@
+<!--<div>-->
+<!--    <div *ngFor="let request of reservations" class = "pl-48 pr-48 pt-12">-->
+<!--        <mat-card fxLayout="row wrap"  fxLayoutGap="16px" class = "p-2">-->
+<!--            <div *ngIf=" request.accommodationDetails != null" fxFlex = "20%" ><img class = "rounded-3xl p-4" src="images/{{request.accommodationDetails.images[0]}}" alt="Lamp">-->
+<!--            </div>-->
+<!--            <div fxFlex = "47%" class = "p-12"  [routerLink]="['/accommodation-details', request.accommodation]">-->
+<!--                {{request.startDate| date:"longDate"}}- {{request.finishDate| date:"longDate"}}-->
+
+<!--            </div>-->
+<!--            <div fxFlex = "30%" class = "align-bottom align-text-bottom pb-4" style = "display: flex; align-items: flex-end;">-->
+<!--                <div class = "align-bottom" style = "display: flex; align-items: flex-end;">-->
+<!--                    <div class = "pr-8 pl-8">{{request.status}}</div>-->
+<!--                    <button mat-button class="nomad-button mr-4" *ngIf=" request.status == 'PENDING'" (click)="delete(request.id!)"><i class = "fa fa-trash nomadButton"></i></button>-->
+<!--                    <button mat-button class="nomad-button mr-4" *ngIf="request.status == 'ACCEPTED'" (click)="cancel(request.id!)">CANCEL</button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </mat-card>-->
+<!--    </div>-->
+
+<!--</div>-->
+
+<p class="text-center font-roboto decoration-1 text-2xl underline-offset-8 tracking-wider underline pt-8">Your requests</p>
+<div class="flex flex-col w-[80%] m-auto mt-12 pb-12 gap-16 items-center md:items-end">
+  <div *ngFor="let request of reservations" class="w-full flex flex-col items-center">
+    <div class="flex flex-col shadow-md md:flex-row h-[500px] w-[400px] md:h-[250px] md:w-full rounded-2xl">
+      <div class="md:w-2/6 h-1/2 md:h-full overflow-hidden">
+        <img [src]="'images/' + request.accommodationDetails?.images?.[0]"
+             class="object-cover md:w-full md:h-full md:pr-12 rounded-2xl hover:scale-125 transition-all duration-500">
+      </div>
+
+      <div class="relative h-full p-8 md:w-3/6 md:h-[250px] h-1/2 pt-3">
+        <p class="font-mono font-bold">{{request.accommodationDetails?.name}}, {{request.accommodationDetails?.address}}</p>
+        <p class="font-mono text-gray-600">{{request.startDate| date:"longDate"}}- {{request.finishDate| date:"longDate"}}</p>
+        <p class="text-right text-red-700 w-1/6 pt-5 pr-5 md:hidden">{{request.status}}</p>
+
+        <div class="absolute bottom-3">
+          <button *ngIf=" request.status == 'PENDING'" (click)="delete(request.id!)"
+                  class="p-3 w-60 bg-gray-200 text-nomad-dark font-bold rounded-2xl hover:scale-110 ease-in-out duration-150">
+            <i class = "fa fa-trash nomadButton"></i></button>
+          <button *ngIf=" request.status == 'ACCEPTED'" (click)="cancel(request)"
+                  class="p-3 w-60 bg-gray-200 text-nomad-dark font-bold rounded-2xl hover:scale-110 ease-in-out duration-150">
+            Cancel</button>
+
+          <button [routerLink]="['/reservation', request.id]"
+                  class="ml-4 p-3 w-60 bg-gray-200 text-nomad-dark font-bold rounded-2xl hover:scale-110 ease-in-out duration-150">
+            See details</button>
+        </div>
+      </div>
+
+      <p class="text-right text-red-700 w-1/6 pt-5 pr-5 hidden md:block">{{request.status}}</p>
+
+    </div>
+  </div>
+</div>

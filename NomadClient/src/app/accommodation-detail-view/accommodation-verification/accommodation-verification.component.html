@@ -1,0 +1,19 @@
+<div>
+    <div *ngFor="let request of requests" class = "pl-48 pr-48 pt-12">
+        <mat-card fxLayout="row wrap"  fxLayoutGap="16px" class = "p-2">
+            <div fxFlex = "20%" ><img class = "rounded-3xl p-4"  [src]="'images/' + request.images[0]" alt="Lamp">
+            </div>
+            <div fxFlex = "47%" class = "p-12"  [routerLink]="['/accommodation-details', request.id]">
+                {{request.name}}, {{request.address}}
+            </div>
+            <div fxFlex = "30%" class = "align-bottom align-text-bottom pb-4" style = "display: flex; align-items: flex-end;">
+                <div class = "align-bottom" style = "display: flex; align-items: flex-end;">
+                    <button mat-button class="nomad-button mr-4" (click)="accept(request.id)">Accept</button>
+                    <button mat-button class="nomad-button" (click)="deny(request.id)">Decline</button>
+
+                </div>
+            </div>
+        </mat-card>
+    </div>
+
+</div>

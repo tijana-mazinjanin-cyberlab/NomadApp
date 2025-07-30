@@ -1,0 +1,29 @@
+<div class = "rounded-3xl bg-nomad-gray grid shadow-2xl lg:grid-cols-2 grid-cols-1 gap-1">
+    <div class="p-8">
+        <h2><span class = "font-bold">$ {{price}}</span></h2>
+        <mat-form-field subscriptSizing="dynamic" *ngIf="datesToHighlight">
+            <mat-label>
+              When</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate [(ngModel)]="fromDate" placeholder="Start date" >
+              <input matEndDate [(ngModel)]="toDate" placeholder="End date">
+            </mat-date-range-input>
+            <!-- <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle> -->
+            <mat-date-range-picker #picker></mat-date-range-picker>
+            <mat-calendar [dateClass]="dateClass(this.datesToHighlight)" [selected] = "this.dateRange" (selectedChange)="this.onChange($event)"></mat-calendar>
+            <button mat-mini-fab class="nomad-brown" (click) = "this.reset()">        <i class="fa fa-recycle text-3xl text-white"></i></button>
+
+        </mat-form-field>
+    </div>
+    <div class="pt-10 mt-10 col">
+        <mat-form-field class="bracket-inputs">
+            <input matInput
+              type="number"
+              placeholder="Guests" [(ngModel)]="guests" [max] = "accommodation.maxGuests" [min] = "accommodation.minGuests">
+          </mat-form-field>
+        <br>
+        <button mat-button class="nomad-button" (click) = "this.reserve()" [disabled] = "(tokenStorage.getRole() != 'GUEST') ||
+         (guests < accommodation.minGuests || guests > accommodation.maxGuests) || !dateRange">Reserve</button>
+    </div>
+
+</div>

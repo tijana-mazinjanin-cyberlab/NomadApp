@@ -1,0 +1,27 @@
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.special-date {
+    background-color: red!important;
+  }
+html {
+  --mdc-checkbox-selected-focus-icon-color: #B59DA4;
+  --mdc-checkbox-selected-hover-icon-color: #B59DA4;
+  --mdc-checkbox-selected-icon-color: #B59DA4;
+  --mdc-checkbox-selected-pressed-icon-color: #B59DA4;
+  --mdc-checkbox-selected-focus-state-layer-color: #B59DA4;
+  --mdc-checkbox-selected-hover-state-layer-color: #B59DA4;
+  --mdc-checkbox-selected-pressed-state-layer-color:#B59DA4;
+  --mat-datepicker-calendar-date-selected-state-background-color: #551B14;
+  --mat-datepicker-toggle-active-state-icon-color:#551B14;
+  --mat-datepicker-calendar-date-in-range-state-background-color: rgba(205, 197, 180, 0.4);
+  --mat-datepicker-calendar-date-focus-state-background-color: rgba(205, 197, 180, 0.4);
+  --mat-datepicker-calendar-date-hover-state-background-color: rgba(205, 197, 180, 0.4);
+}
+/*rgba(178, 120, 88, 0.2);*/

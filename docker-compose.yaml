@@ -1,0 +1,38 @@
+services:
+
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=powersystembilling
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: ./NomadServer
+    container_name: backend
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=powersystembilling
+
+  frontend:
+    build: ./NomadClient
+    container_name: frontend
+    ports:
+      - 8081:80
+
+volumes:
+  postgres_data:
+

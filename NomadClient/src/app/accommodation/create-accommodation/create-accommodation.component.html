@@ -1,0 +1,99 @@
+<div class="pl-32 pr-32 pt-24 pb-24">
+
+  <div class="flex w-[50%] m-auto gap-12 justify-around mb-8">
+    <div>
+      <input id="room" name="accommodationType" type="radio" value="room" class="" checked (change)="onAccommodationTypeChange($event)">
+      <label for="room" class="text-gray-900 text-md font-sans tracking-widest pl-4">ROOM</label>
+    </div>
+    <div>
+      <input id="studio" name="accommodationType" type="radio" value="studio" class="" (change)="onAccommodationTypeChange($event)">
+      <label for="studio" class="text-gray-900 text-md font-sans tracking-widest pl-4">STUDIO</label>
+    </div>
+    <div>
+      <input id="house" name="accommodationType" type="radio" value="house" class="" (change)="onAccommodationTypeChange($event)">
+      <label for="house" class="text-gray-900 text-md font-sans tracking-widest pl-4">HOUSE</label>
+    </div>
+  </div>
+
+  <label for="name" class="block text-md font-medium leading-6 text-gray-900 font-sans pl-4 underline" >Name</label>
+  <div class="relative mt-2 rounded-md shadow-sm mb-8">
+    <input [(ngModel)]="name" type="text" name="name" id="name" class="block shadow-2xl shadow-gray-400 w-full rounded-md focus:border-gray-300 py-2.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-nomad-dark sm:text-sm sm:leading-6" placeholder="Enter accommodation name">
+  </div>
+
+  <label for="description" class="block text-md font-medium leading-6 text-gray-900 font-sans pl-4 underline" >Description</label>
+  <div class="relative mt-2 rounded-md shadow-sm mb-8">
+    <textarea [(ngModel)]="description" name="description" id="description" rows="4" cols="50"
+              class="block shadow-2xl shadow-gray-300 w-full rounded-md focus:border-gray-300 py-3.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-nomad-dark sm:text-sm sm:leading-6" placeholder="Enter accommodation description"></textarea>
+  </div>
+
+<!--  <p class="block text-md font-medium leading-6 text-gray-900 font-sans pl-4 underline" >Accommodation type</p>-->
+
+  <div class="flex gap-24">
+    <div class="flex flex-col">
+      <label for="minGuest" class="block text-md font-medium leading-6 text-gray-900 font-sans pl-4 underline" >Min Guest</label>
+      <div class="relative mt-2 rounded-md shadow-sm mb-8">
+        <input [(ngModel)]="minGuest" type="number" min="1" name="minGuest" id="minGuest" class="block shadow-2xl shadow-gray-400 w-full rounded-md focus:border-gray-300 py-2.5 pl-7 pr-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-nomad-dark sm:text-sm sm:leading-6" placeholder="1">
+      </div>
+    </div>
+    <div class="flex flex-col">
+      <label for="maxGuest" class="block text-md font-medium leading-6 text-gray-900 font-sans pl-4 underline" >Max Guest</label>
+      <div class="relative mt-2 rounded-md shadow-sm mb-8                                                                                                 ">
+        <input [(ngModel)]="maxGuest" type="number" min="1" name="maxGuest" id="maxGuest" class="block shadow-2xl shadow-gray-400 w-full rounded-md focus:border-gray-300 py-2.5 pl-7 pr-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-nomad-dark sm:text-sm sm:leading-6" placeholder="1">
+      </div>
+    </div>
+  </div>
+
+  <label for="minGuest" class="block text-md font-medium leading-6 text-gray-900 font-sans pl-4 underline" >Deadline for cancellation</label>
+  <div class="relative mt-2 rounded-md shadow-sm mb-8">
+    <input [(ngModel)]="deadline" type="number" min="0" name="deadline" id="deadline" class="block shadow-2xl shadow-gray-400 w-full rounded-md focus:border-gray-300 py-2.5 pl-7 pr-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-nomad-dark sm:text-sm sm:leading-6" placeholder="0">
+  </div>
+
+  <div *ngIf="edit && accommodation">
+    <app-map [defaultLocation]="location" (currentLocation)="getCurrentLocation($event)"></app-map>
+    <p class="text-md font-medium leading-6 text-gray-900 font-sans pt-4 pl-4 pb-5 mt-9 underline">Availability</p>
+    <app-accommodation-availability (defaultPriceEmitter)="getCurrentDefaultPrice($event)"
+                                    (conformationType)="getCurrentConformationType($event)"
+                                    (priceType)="getCurrentPriceType($event)"
+                                    (pricesForIntervals)="getCurrentIntervalPrices($event)"
+                                    (unavailableIntervalsEmmiter)="getCurrentUnavailableIntervals($event)"
+                                    (availableIntervalsEmmiter)="getCurrentAvailableIntervals($event)"
+                                    [accommodation]="accommodation">
+
+    </app-accommodation-availability>
+  </div>
+
+  <div *ngIf="!edit">
+    <app-map (currentLocation)="getCurrentLocation($event)"></app-map>
+    <p class="text-md font-medium leading-6 text-gray-900 font-sans pt-4 pl-4 pb-5 mt-9 underline">Availability</p>
+    <app-accommodation-availability (defaultPriceEmitter)="getCurrentDefaultPrice($event)"
+                                    (conformationType)="getCurrentConformationType($event)"
+                                    (priceType)="getCurrentPriceType($event)"
+                                    (pricesForIntervals)="getCurrentIntervalPrices($event)"
+                                    (unavailableIntervalsEmmiter)="getCurrentUnavailableIntervals($event)"
+                                    (availableIntervalsEmmiter)="getCurrentAvailableIntervals($event)">
+
+    </app-accommodation-availability>
+  </div>
+
+  <p class="text-md font-medium leading-6 text-gray-900 font-sans pt-4 pl-4 mt-8 underline">Amenities</p>
+  <div class="flex flex-wrap gap-12 h-fit p-10 border-2 border-gray-300 rounded-2xl shadow-2xl mt-2 mb-8">
+    <div *ngFor="let amenity of amenities" class="flex items-center gap-4">
+        <input [id]="amenity.id" name="checkbox" type="checkbox" class="appearance-none ring-offset-2 ring-2 ring-gray-300 checked:bg-nomad-dark checked:ring-nomad-dark border-0 rounded-lg h-7 w-7 transition ease-in-out delay-150 cursor-pointer">
+        <label class="text-gray-900 text-sm font-sans tracking-widest">{{amenity.name}}</label>
+    </div>
+  </div>
+
+  <app-image-upload [images]="accommodaitonImages" (selectedImagesOutput)="getImages($event)" ></app-image-upload>
+
+  <div class="flex flex-col my-md:flex-row justify-between items-center">
+    <button (click)="saveAcoommodation()" class="bg-gray-300 h-fit text-nomad-darker text-lg tracking-widest font-bold font-sans rounded-2xl py-3 px-24 shadow-2xl hover:scale-110 ease-in-out duration-150 mt-16">Save</button>
+
+    <div *ngIf="isConformationVisible"
+      class="flex flex-col md:flex-row items-center gap-8 p-8 border-2 border-gray-500 rounded-2xl mt-12 ml-8">
+      <p class="text-gray-600 font-mono">Are you sure you want to proceed? Please check your data before submitting.</p>
+      <button (click)="confirm()" class="bg-gray-100 border-2 border-nomad-dark text-nomad-darker text-sm tracking-widest font-bold font-sans rounded-2xl py-3 px-16 shadow-2xl hover:scale-110 ease-in-out duration-150">Confirm</button>
+      <button (click)="cancel()" class="bg-nomad-dark text-white text-nomad-darker text-sm tracking-widest font-bold font-sans rounded-2xl py-3 px-16 shadow-2xl hover:scale-110 ease-in-out duration-150">Cancel</button>
+    </div>
+  </div>
+
+</div>

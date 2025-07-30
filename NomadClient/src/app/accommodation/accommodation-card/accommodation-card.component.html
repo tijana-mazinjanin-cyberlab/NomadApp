@@ -1,0 +1,20 @@
+<div class="h-3/4 relative">
+  <div *ngIf="isGuest" (click)="onLikeClick()" [ngClass]="{'text-red-700': liked, 'text-gray-500 text-opacity-80': !liked}">
+    <i class="fa-solid fa-heart text-3xl absolute top-4 right-4"></i>
+  </div>
+  <img [routerLink]="['/accommodation-details', accommodation.id, searchFilterForm.startDate, searchFilterForm.finishDate, searchFilterForm.peopleNum]"
+       *ngIf="!isSearchMode" src="images/{{accommodation.images[0]}}" alt="Accommodation image" class="w-full h-full object-cover rounded-2xl">
+  <img [routerLink]="['/accommodation-details', accommodationSearch.id, searchFilterForm.startDate, searchFilterForm.finishDate, searchFilterForm.peopleNum]"
+       *ngIf="isSearchMode" src="images/{{accommodationSearch.images[0]}}" alt="Accommodation image" class="w-full h-full object-center rounded-2xl">
+</div>
+
+<div class="flex flex-col justify-between h-[180px] p-3">
+  <p *ngIf="!isSearchMode" class="text-md text-gray-600 font-bold">{{accommodation.name}}, {{accommodation.address}}</p>
+  <p *ngIf="isSearchMode" class="text-md text-gray-600 font-bold">{{accommodationSearch.name}}, {{accommodationSearch.address}}</p>
+  <p class="pl-3 text-sm">Excellent</p>
+  <p *ngIf="!isSearchMode" class="text-md text-gray-600">$ {{accommodation.defaultPrice}} Night</p>
+  <p *ngIf="isSearchMode" class="text-md text-gray-600">Price per night: {{accommodationSearch.pricePerNight}}</p>
+  <p *ngIf="isSearchMode" class="text-md text-gray-600">Total price: {{accommodationSearch.totalPrice}}</p>
+  <p *ngIf="isSearchMode" class="text-md text-gray-600">Average rating: {{accommodationSearch.averageRating}}</p>
+
+</div>

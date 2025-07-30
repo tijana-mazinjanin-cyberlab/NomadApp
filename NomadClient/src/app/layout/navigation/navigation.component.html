@@ -1,0 +1,68 @@
+<div class="w-full bg-nomad-light h-16 ">
+  <div class="flex flex-row h-full justify-between 2xl:ml-80 2xl:mr-80 md:ml-32 md:mr-32 sm:ml-8 sm:mr-8 mr-4 gap-16 items-center">
+    <img [routerLink]="['/home']" src="../../../assets/images/logo.png" alt="Logo" class="object-scale-down h-12 cursor-pointer"/>
+    <div class="flex flex-row md:gap-4 gap-16 items-center">
+      <div *ngIf="user && user.role === ''" [routerLink]="['/login']" class="flex flex-row gap-2 items-center rounded-lg hover:bg-nomad-nav-bar h-12 w-24">
+        <fa-icon  class="text-2xl cursor-pointer" [icon]="faPersonWalkingLuggage"></fa-icon>
+        <p class="cursor-pointer ">LOGIN</p>
+      </div>
+      <div *ngIf="user && user.role !== ''" (click)="onLogout()" [routerLink]="['/home']" class="flex flex-row gap-2 items-center rounded-lg hover:bg-nomad-nav-bar h-12 w-24">
+        <fa-icon  class="text-2xl cursor-pointer" [icon]="faArrowRightFromBracket"></fa-icon>
+        <button  class="cursor-pointer ">LOGOUT</button>
+      </div>
+      <fa-icon name="menu" (click)="showDropDownMenu()" class="text-3xl cursor-pointer md:hidden" [icon]="faBars"></fa-icon>
+    </div>
+  </div>
+</div>
+
+<nav *ngIf="navBar && user && user.role !==''" class="w-full bg-nomad-nav-bar md:h-20 h-80 md:block">
+  <div class="flex md:flex-row h-full justify-between 2xl:ml-96 2xl:mr-96 md:ml-24 md:mr-24 sm:ml-16 sm:mr-16 items-center flex-col gap-8 top-[9%] ">
+    <div *ngIf="user && (user.role === 'HOST' || user.role === 'GUEST' )" [routerLink]="['/notifications']" class="flex flex-col items-center cursor-pointer hover:bg-nomad-light rounded-lg w-40">
+      <fa-icon  class="text-2xl cursor-pointer" [icon]="faEnvelope"></fa-icon>
+      <p class="text-white">Notifications</p>
+    </div>
+    <div *ngIf="user && (user.role === 'HOST' )" [routerLink]="['/reservation-verification']" class="flex flex-col items-center cursor-pointer hover:bg-nomad-light rounded-lg w-40">
+      <fa-icon  class="text-2xl cursor-pointer " [icon]="faFileLines"></fa-icon>
+      <p class="text-white ">Requests</p>
+    </div>
+    <div *ngIf="user && (user.role === 'GUEST')" [routerLink]="['/favourites']" class="flex flex-col items-center cursor-pointer  hover:bg-nomad-light rounded-lg w-40">
+      <fa-icon class="text-2xl cursor-pointer" [icon]="faHeart"></fa-icon>
+      <p class="text-white">Favourites</p>
+    </div>
+    <div *ngIf="user && (user.role === 'HOST')" [routerLink]="['/report']" class="flex flex-col items-center cursor-pointer  hover:bg-nomad-light rounded-lg w-40">
+      <fa-icon class="text-2xl cursor-pointer" [icon]="faBolt"></fa-icon>
+      <p class="text-white ">Report</p>
+    </div>
+    <div *ngIf="user && (user.role === 'HOST')" [routerLink]="['/host-accommodations']" class="flex flex-col items-center cursor-pointer  hover:bg-nomad-light rounded-lg w-40">
+      <fa-icon class="text-2xl cursor-pointer" [icon]="faList"></fa-icon>
+      <p class="text-white ">Listing</p>
+    </div>
+    <div *ngIf="user && (user.role === 'GUEST')" [routerLink]="['/guest-reservation']" class="flex flex-col items-center cursor-pointer  hover:bg-nomad-light rounded-lg w-40">
+      <fa-icon class="text-2xl cursor-pointer" [icon]="faList"></fa-icon>
+      <p class="text-white ">Reservations</p>
+    </div>
+    <div *ngIf="user && (user.role === 'ADMIN')" [routerLink]="['/login']" class="flex flex-col items-center cursor-pointer  hover:bg-nomad-light rounded-lg w-40">
+      <fa-icon class="text-2xl cursor-pointer" [icon]="faList"></fa-icon>
+      <p class="text-white ">Accommodations</p>
+    </div>
+    <div *ngIf="user && (user.role === 'ADMIN')" [routerLink]="['/admin-accounts-view']" class="flex flex-col items-center cursor-pointer  hover:bg-nomad-light rounded-lg w-40">
+      <fa-icon class="text-2xl cursor-pointer" [icon]="faUsers"></fa-icon>
+      <p class="text-white ">All users</p>
+    </div>
+    <div *ngIf="user && (user.role === 'ADMIN')" [routerLink]="['/comment-reports']" class="flex flex-col items-center cursor-pointer hover:bg-nomad-light rounded-lg w-40">
+      <fa-icon class="text-2xl cursor-pointer" [icon]="faBolt"></fa-icon>
+      <p class="text-white ">Reported comments</p>
+    </div>
+    <div *ngIf="user && (user.role === 'ADMIN')" [routerLink]="['/accommodation-verification']" class="flex flex-col items-center cursor-pointer hover:bg-nomad-light rounded-lg w-40">
+      <fa-icon class="text-2xl cursor-pointer" [icon]="faPaper"></fa-icon>
+      <p class="text-white ">Unverified Accommodations</p>
+    </div>
+    <div [routerLink]="['/profile']" class="flex flex-col items-center cursor-pointer hover:bg-nomad-light rounded-lg w-40">
+      <fa-icon class="text-2xl cursor-pointer " [icon]="faUser"></fa-icon>
+      <p class="text-white">Profile</p>
+    </div>
+  </div>
+</nav>
+
+<app-search-bar *ngIf="isHomePage()" class="w-full flex items-center justify-center bg-nomad-light pt-10 pb-10"></app-search-bar>
+<app-search-bar-reservations *ngIf="isRequestsPage() " class="w-full flex items-center justify-center bg-nomad-light pt-10 pb-10"></app-search-bar-reservations>

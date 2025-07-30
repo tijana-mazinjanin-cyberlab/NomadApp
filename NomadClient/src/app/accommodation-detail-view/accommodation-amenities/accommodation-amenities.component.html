@@ -1,0 +1,12 @@
+<div class="p-12 ">
+    <h2 class="pb-8 font-roboto decoration-1 underline-offset-8 text-3xl underline">Amenities</h2>
+    <div class = "rounded-3xl bg-nomad-gray grid  gap-12 md:grid-cols-6 grid-cols-3 gap-1 p-12 shadow-md">
+        <div *ngFor="let amenity of amenities" class="pl-6">
+            <div class="col">
+                <i class="fa {{amenity.icon}} text-3xl"></i>
+                {{amenity.name}} 
+            </div>
+
+        </div>
+    </div>
+</div>

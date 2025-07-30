@@ -1,0 +1,51 @@
+<div class="flex flex-row gap-12">
+<form [formGroup]="searchForm" (ngSubmit)="search()" class="flex flex-col my-md:flex-row bg-white m-auto rounded-3xl p-7 items-center justify-around gap-8 shadow-2xl">
+
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label>
+      <fa-icon [icon]="faLocationArrow" class="pr-2"></fa-icon>
+      Where</mat-label>
+    <input formControlName="city" type="text"
+           placeholder="Pick destination"
+           aria-label="Where"
+           matInput
+           list="locations"
+           [(ngModel)]="inputLocation"
+           (change)="onLocationInputChanged($event)">
+    <datalist #locationsDatalist id="locations">
+      <option *ngFor="let suggestion of suggestedLocations" [value]="suggestion">{{ suggestion }}</option>
+    </datalist>
+
+  </mat-form-field>
+
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label>
+      When</mat-label>
+    <mat-date-range-input [rangePicker]="picker" >
+      <input formControlName="startDate" matStartDate placeholder="Start date">
+      <input formControlName="finishDate" matEndDate placeholder="End date">
+    </mat-date-range-input>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  </mat-form-field>
+
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label>
+      <fa-icon [icon]="faPeopleGroup" class="pr-2"></fa-icon>
+      Who</mat-label>
+    <input formControlName="peopleNum" type="number"
+           placeholder="Enter number of people"
+           aria-label="Who"
+           matInput
+           min="2">
+
+  </mat-form-field>
+  <button type="submit" class="rounded-3xl bg-nomad-darker text-white text-lg p-3 pl-6 pr-6 shadow-2xl hover:scale-110">
+    <fa-icon [icon]="faSearch" class="pr-3"></fa-icon>
+    Search</button>
+
+</form>
+<button (click)="openDialog()" class="flex flex-row bg-nomad-filter m-auto rounded-xl p-5 hover:bg-nomad-filter-hover items-center justify-around ">
+  <fa-icon [icon]="faFilter" class="pr-3"></fa-icon>Filter
+</button>
+</div>

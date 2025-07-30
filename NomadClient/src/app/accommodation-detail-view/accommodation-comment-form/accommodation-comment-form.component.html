@@ -1,0 +1,33 @@
+<div class = "p-5 ">
+    <mat-card class = "p-4" *ngIf = "!hasComment">
+        <div>
+            <div class = "comment-form">
+
+                <div  class = "star-rating" >
+<!--                    <h2 class="font-roboto decoration-1 underline-offset-8 text-3xl underline pb-4 rating-title">Rating</h2>-->
+                    <div>
+                        <span (click)="setRating(1)" *ngIf = "rating>=1"><i  class="material-icons text-3xl text-nomad-dark p-5 star">star</i></span>
+                        <span (click)="setRating(2)" *ngIf = "rating>=2"><i  class="material-icons text-3xl text-nomad-dark p-5 star">star</i></span>
+                        <span (click)="setRating(3)" *ngIf = "rating>=3"><i  class="material-icons text-3xl text-nomad-dark p-5 star">star</i></span>
+                        <span (click)="setRating(4)" *ngIf = "rating>=4"><i  class="material-icons text-3xl text-nomad-dark p-5 star">star</i></span>
+                        <span (click)="setRating(5)" *ngIf = "rating>=5"><i  class="material-icons text-3xl text-nomad-dark p-5 star">star</i></span>
+
+                        <!-- <i (click)="setRating(1)" *NgIf = "rating>=1" class="fa fa-star-o text-5xl text-nomad-dark p-5"></i> -->
+                        <span (click)="setRating(2)" *ngIf = "rating<2"><i  class="material-icons text-3xl text-nomad-dark p-5 star">star_outline</i></span>
+                        <span (click)="setRating(3)" *ngIf = "rating<3"><i  class="material-icons text-3xl text-nomad-dark p-5 star">star_outline</i></span>
+                        <span (click)="setRating(4)" *ngIf = "rating<4"><i  class="material-icons text-3xl text-nomad-dark p-5 star">star_outline</i></span>
+                        <span (click)="setRating(5)" *ngIf = "rating<5"><i  class="material-icons text-3xl text-nomad-dark p-5 star">star_outline</i></span>
+                    </div>
+
+                </div>
+                <mat-form-field [floatLabel]="getFloatLabelValue()" class = "comment-field">
+                    <mat-label>Comment Text</mat-label>
+                    <input matInput placeholder="Input Comment Text" [(ngModel)] = "text">
+                </mat-form-field>
+                <button mat-button class="underline text-nomad-dark font-bold text-md" (click)="post()" [disabled] = "!canRate">Comment</button>
+
+            </div>
+
+        </div>
+    </mat-card>
+</div>

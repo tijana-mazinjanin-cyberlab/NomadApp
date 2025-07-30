@@ -1,0 +1,23 @@
+
+.mat-mdc-slider.mat-primary {
+  --mdc-slider-handle-color: #551B14;
+  --mdc-slider-focus-handle-color: #551B14;
+  --mdc-slider-hover-handle-color: #551B14;
+  --mdc-slider-active-track-color: #551B14;
+  --mdc-slider-inactive-track-color: #551B14;
+  --mdc-slider-with-tick-marks-active-container-color: #551B14;
+  --mdc-slider-with-tick-marks-inactive-container-color: #551B14;
+  --mat-mdc-slider-ripple-color: #551B14;
+}
+.mat-mdc-radio-button.mat-accent{
+  --mdc-radio-selected-focus-icon-color: #B59DA4;
+  --mdc-radio-selected-hover-icon-color: #B59DA4;
+  --mdc-radio-selected-icon-color: #B59DA4;
+  --mdc-radio-selected-pressed-icon-color: #B59DA4;
+  --mat-radio-ripple-color: #B59DA4;
+  --mat-radio-checked-ripple-color: #B59DA4;
+  --mdc-radio-disabled-selected-icon-color: #B59DA4;
+  --mdc-radio-disabled-unselected-icon-color: #B59DA4;
+  --mdc-radio-unselected-hover-icon-color:#B59DA4
+}
+

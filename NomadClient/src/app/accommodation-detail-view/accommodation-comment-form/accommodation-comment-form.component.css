@@ -1,0 +1,28 @@
+.comment-form{
+    margin: auto;
+    text-align: left;
+}
+.rating-title{
+    text-align: left;
+}
+.comment-field{
+    width:80%;
+    padding:2%;
+}
+.nomad-button{
+    background-color:#F4F4F4;
+    color:#551B14!important;
+    border-radius: 25px;
+    margin-left:2%;
+    padding:3%;
+}
+mat-label{
+  color: #421510;
+}
+
+mat-form-field {
+  --mdc-filled-text-field-focus-active-indicator-color: #421510;
+}
+.star {
+  cursor: pointer;
+}

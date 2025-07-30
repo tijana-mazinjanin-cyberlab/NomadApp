@@ -1,0 +1,31 @@
+<p class="text-center font-roboto decoration-1 text-2xl underline-offset-8 tracking-wider underline pt-8">Comment Reports</p>
+<div class="flex flex-col w-[80%] m-auto mt-12 pb-12 gap-16 items-center md:items-end">
+  <div *ngFor="let report of reports" class="w-full flex flex-col items-center">
+    <div class="flex flex-col shadow-md md:flex-row h-[500px] w-[400px] md:h-[250px] md:w-full rounded-2xl">
+      <!-- <div class="md:w-2/6 h-1/2 md:h-full overflow-hidden">
+        <img src="https://tecdn.b-cdn.net/img/new/standard/nature/184.jpg"
+             class="object-cover md:w-full md:h-full md:pr-12 rounded-2xl hover:scale-125 transition-all duration-500">
+      </div> -->
+
+      <div class="relative h-full p-8 md:w-3/6 md:h-[250px] h-1/2 pt-3">
+        <p class="font-mono font-bold">{{report.reason}}</p>
+        <p class="font-mono font-bold" >{{report.reportedCommentDetails?.text}}</p>
+        <p class="font-mono font-bold" >{{report.reportedCommentDetails?.userName}}</p>
+        <!-- <p class="font-mono font-bold">{{request.accommodationDetails!.name}}, {{request.accommodationDetails!.address}}</p> -->
+        <!-- <p class="font-mono text-gray-600">{{request.startDate| date:"longDate"}}- {{request.finishDate| date:"longDate"}}</p> -->
+        <p class="text-right text-red-700 w-1/6 pt-5 pr-5 md:hidden">{{report.reportStatus}}</p>
+
+        <button *ngIf=" report.reportStatus == 'PENDING'" (click)="accept(report.id!)"
+                class="absolute bottom-3  p-3 lg:px-18 md:px-12 px-4 bg-gray-200 text-nomad-dark font-bold rounded-2xl hover:scale-110 ease-in-out duration-150">
+          Accept</button>
+        <button *ngIf=" report.reportStatus == 'PENDING'" (click)="deny(report.id!)"
+                class="absolute bottom-3 right-9 p-3 lg:px-18 md:px-12 px-4 bg-gray-200 text-nomad-dark font-bold rounded-2xl hover:scale-110 ease-in-out duration-150">
+          Reject</button>
+
+      </div>
+      <!-- <p class="text-right text-gray-600 w-1/6 pt-5 pr-5 hidden md:block">User canceled: {{request.userDetails!.cancellationNumber}}</p> -->
+      <p class="text-right text-red-700 w-1/6 pt-5 pr-5 hidden md:block">{{report.reportStatus}}</p>
+
+    </div>
+  </div>
+</div>

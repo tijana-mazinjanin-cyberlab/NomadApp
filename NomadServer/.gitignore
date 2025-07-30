@@ -1,0 +1,46 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+build/
+.mvn/wrapper/maven-wrapper.jar
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+logs/
+
+# Compiled class files
+*.class
+
+# Package Files
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Spring Boot specific
+# Embedded Tomcat server logs
+catalina.out
+# Spring Boot Devtools restartability agent
+.spring-boot-devtools.properties

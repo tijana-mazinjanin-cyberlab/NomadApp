@@ -1,0 +1,14 @@
+<label *ngIf="displaySearchBox()" for="location" class="block text-md font-medium leading-6 text-gray-900 font-sans pl-4 underline" >Location</label>
+<div *ngIf="displaySearchBox()" class="flex flex-row items-center mt-2 rounded-md shadow-sm mb-8 ring-1 ring-inset ring-gray-300">
+    <input name="location" id="location" [(ngModel)]="inputLocation" (change)="onLocationInputChanged($event)" list="locations"
+           class="block shadow-2xl shadow-gray-300 w-full rounded-md focus:border-gray-300 py-3.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-nomad-dark sm:text-sm sm:leading-6" placeholder="Enter accommodation location"/>
+    <datalist #locationsDatalist id="locations">
+        <option *ngFor="let suggestion of suggestedLocations" [value]="suggestion">{{ suggestion }}</option>
+    </datalist>
+
+    <button (click)="onSearchLocation()"><i class="fa-solid fa-magnifying-glass text-2xl text-nomad-dark mr-2 p-3 cursor-pointer"></i></button>
+</div>
+
+<div class="border-2 border-gray-600">
+    <div id="map" class="h-[500px]"></div>
+</div>

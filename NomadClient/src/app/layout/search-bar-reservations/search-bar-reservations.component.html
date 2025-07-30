@@ -1,0 +1,36 @@
+
+<form [formGroup]="searchForm" (ngSubmit)="search()" class="flex flex-col gap-12 items-center justify-around">
+  <div class="flex flex-col my-md:flex-row bg-white m-auto rounded-3xl p-7 items-center justify-around gap-8 shadow-2xl">
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label>
+      <fa-icon [icon]="faLocationArrow" class="pr-2"></fa-icon>
+      Accommodation name</mat-label>
+    <input formControlName="name" type="text"
+           placeholder="Accommodation name"
+           aria-label="Name"
+           matInput>
+
+  </mat-form-field>
+
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label>
+      Date range</mat-label>
+    <mat-date-range-input [rangePicker]="picker" >
+      <input formControlName="startDate" matStartDate placeholder="Start date">
+      <input formControlName="finishDate" matEndDate placeholder="End date">
+    </mat-date-range-input>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  </mat-form-field>
+  <button type="submit" class="rounded-3xl bg-nomad-darker text-white text-lg p-3 pl-6 pr-6 shadow-2xl hover:scale-110">
+    <fa-icon [icon]="faSearch" class="pr-3"></fa-icon>
+    Search</button>
+</div>
+  <mat-radio-group formControlName="status" aria-label="Select an option">
+    <mat-radio-button (change)="radioChange($event)" value="all">All</mat-radio-button>
+    <mat-radio-button (change)="radioChange($event)" value="ACCEPTED">Accepted</mat-radio-button>
+    <mat-radio-button (change)="radioChange($event)" value="REJECTED">Rejected</mat-radio-button>
+    <mat-radio-button (change)="radioChange($event)" value="PENDING">Pending</mat-radio-button>
+    <mat-radio-button (change)="radioChange($event)" value="CANCELED">Canceled</mat-radio-button>
+  </mat-radio-group>
+</form>

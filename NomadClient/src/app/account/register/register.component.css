@@ -1,0 +1,12 @@
+.mat-mdc-radio-button.mat-accent{
+  --mdc-radio-selected-focus-icon-color: white;
+  --mdc-radio-selected-hover-icon-color: white;
+  --mdc-radio-selected-icon-color: white;
+  --mdc-radio-selected-pressed-icon-color: white;
+  --mat-radio-ripple-color: white;
+  --mat-radio-checked-ripple-color: white;
+  --mdc-radio-disabled-selected-icon-color: gray;
+  --mdc-radio-disabled-unselected-icon-color: gray;
+  --mdc-radio-unselected-hover-icon-color:gray
+}
+

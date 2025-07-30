@@ -1,0 +1,154 @@
+
+<div class="flex xl:flex-row flex-col  flex-wrap justify-between  pb-12 2xl:ml-80 2xl:mr-80 xl:ml-32 xl:mr-32 sm:ml-8 sm:mr-8 mr-4 items-center">
+  <app-modal-deactivate-account (updatedResponse)="getDeleteConformation($event)" *ngIf="isModalVisible"></app-modal-deactivate-account>
+  <div class="flex flex-col items-center gap-12 2xl:mt-32 mt-12">
+  <div class="flex flex-row bg-gray-100 rounded-3xl py-16 px-10 items-center justify-around gap-8 shadow-2xl">
+    <p class="bg-nomad-dark px-12 py-10 text-5xl text-white decoration-solid rounded-full">{{user.firstName.at(0)}}</p>
+    <p class="text-xl decoration-solid">{{user.firstName}} {{user.lastName}}</p>
+  </div>
+    <button (click)="showDialog()" class="text-center rounded-xl text-2xl p-2 pl-6 pr-6 text-nomad-dark decoration-solid bg-nomad-gray2 hover:bg-nomad-gray-hover shadow-2xl">
+      Delete account
+    </button>
+  </div>
+
+  <div class="flex flex-col 2xl:mt-24 mt-12  rounded-3xl  py-16 px-16 md:w-[60%]  w-[90%]  border border-gray-400">
+    <div *ngIf="!isEditMode && !isResetPasswordMode" class="flex flex-col divide-y divide-gray-400 gap-2" >
+      <div>
+        <p class="pl-3">Name and Surname</p>
+        <p class="pl-3 pt-3">{{user.firstName}} {{user.lastName}}</p>
+      </div>
+      <div>
+        <p class="pl-3 pt-3">Adress</p>
+        <p class="pl-3 pt-3">{{user.address}}</p>
+      </div>
+      <div>
+        <p class="pl-3 pt-3">Phone number</p>
+        <p class="pl-3 pt-3">{{user.phoneNumber}}</p>
+      </div>
+
+      <div >
+        <p class="pl-3 pt-3">Username</p>
+        <p class="pl-3 pt-3">{{user.username}}</p>
+      </div>
+      <div class="pb-5"></div>
+      <button (click)="turnEditMode()" class="flex flex-row rounded-xl text-2xl text-nomad-dark  decoration-solid bg-nomad-gray2 hover:bg-nomad-gray-hover items-center justify-around p-2 pl-6 pr-6 shadow-2xl">
+        Edit account
+      </button>
+    </div>
+
+
+    <div *ngIf="isEditMode" class="flex flex-col gap-2"  [formGroup]="profileForm" (ngSubmit)="editUser()">
+      <div class="flex flex-row gap-2">
+        <mat-form-field class="example-full-width">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="firstName">
+          <mat-error *ngIf="f && f['firstName'] && f['firstName'].errors?.['required']">
+            First name is required.
+          </mat-error>
+          <mat-error *ngIf="f && f['firstName'] && f['firstName'].errors?.['pattern']">
+            Wrong format.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Surname</mat-label>
+          <input matInput formControlName="lastName" pattern="\b[A-Za-z]{3,20}\b" required>
+          <mat-error *ngIf="f && f['lastName'] && f['lastName'].errors?.['required']">
+            Last name is required.
+          </mat-error>
+          <mat-error *ngIf="f && f['lastName'] && f['lastName'].errors?.['pattern']">
+            Wrong format.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="flex flex-row ">
+        <mat-form-field class="example-full-width">
+          <mat-label>Adress</mat-label>
+          <input matInput formControlName="address" pattern="\b[A-Za-z0-9 ]{3,20}\b" required>
+          <mat-error *ngIf="f && f['address'] && f['address'].errors?.['required']">
+            Address is required.
+          </mat-error>
+          <mat-error *ngIf="f && f['address'] && f['address'].errors?.['pattern']">
+            Wrong format.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="flex flex-row">
+        <mat-form-field class="example-full-width">
+          <mat-label>Phone number</mat-label>
+          <input matInput formControlName="phoneNumber" pattern= "^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$" required>
+          <mat-error *ngIf="f && f['phoneNumber'] && f['phoneNumber'].errors?.['required']">
+            Name is required.
+          </mat-error>
+          <mat-error *ngIf="f && f['phoneNumber'] && f['phoneNumber'].errors?.['pattern']">
+            Wrong format.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="flex flex-row">
+        <mat-form-field class="example-full-width">
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" pattern="\b[A-Za-z0-9]{3,20}\b" required>
+          <mat-error *ngIf="f && f['username'] && f['username'].errors?.['required']">
+            Username is required.
+          </mat-error>
+          <mat-error *ngIf="f && f['username'] && f['username'].errors?.['pattern']">
+            Wrong format.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+<!--      <div class="flex flex-row" *ngFor="let error of errors">-->
+<!--        {{error}}-->
+<!--      </div>-->
+
+      <div class="flex flex-row gap-8">
+        <button [disabled]="!profileForm.valid" class="flex flex-row rounded-xl w-[30%] text-2xl text-nomad-dark  decoration-solid bg-nomad-gray2 hover:bg-nomad-gray-hover p-2 pl-6 pr-6 items-center justify-around gap-8 shadow-2xl"
+        (click)="editUser()">
+          Save
+        </button>
+        <button (click)="exitEditMode()" class="flex flex-row rounded-xl w-[30%] text-2xl text-nomad-dark  decoration-solid bg-nomad-gray2 hover:bg-nomad-gray-hover p-2 pl-6 pr-6 items-center justify-around gap-8 shadow-2xl">
+          Cancel
+        </button>
+      </div>
+    </div>
+
+
+    <p class="pl-3 pt-5 text-l underline decoration-solid cursor-pointer" (click) = "enterResetPasswordMode()" *ngIf="!isResetPasswordMode">Change password</p>
+    <div *ngIf="isResetPasswordMode" [formGroup]="resetPasswordForm" (ngSubmit)="resetPassword()" class="flex flex-col gap-2" >
+      <div class="flex flex-row gap-2">
+        <mat-form-field class="example-full-width" >
+          <mat-label>Old Password</mat-label>
+          <input matInput formControlName="oldPassword" required>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>New Password</mat-label>
+          <input matInput formControlName="newPassword" required>
+        </mat-form-field>
+      </div>
+      <div class="flex flex-row ">
+        <mat-form-field class="example-full-width">
+          <mat-label>Confirm New Password</mat-label>
+          <input matInput pattern="\b[A-Za-z0-9]{3,20}\b" required formControlName="confirmPassword">
+        </mat-form-field>
+      </div>
+      <div class="flex flex-row gap-8">
+        <button #resetPasswordButton [disabled]="!resetPasswordForm.valid" class="flex flex-row rounded-xl w-[30%] text-2xl text-nomad-dark  decoration-solid bg-nomad-gray2 hover:bg-nomad-gray-hover p-2 pl-6 pr-6 items-center justify-around gap-8 shadow-2xl"
+        (click)="resetPassword()">
+          Save
+        </button>
+        <button (click)="exitResetPasswordMode()" class="flex flex-row rounded-xl w-[30%] text-2xl text-nomad-dark  decoration-solid bg-nomad-gray2 hover:bg-nomad-gray-hover p-2 pl-6 pr-6 items-center justify-around gap-8 shadow-2xl">
+          Cancel
+        </button>
+      </div>
+
+      <div class="flex flex-row" *ngFor="let error of passwordErrors">
+        {{error}}
+      </div>
+
+  </div>
+
+
+
+  </div>
+</div>

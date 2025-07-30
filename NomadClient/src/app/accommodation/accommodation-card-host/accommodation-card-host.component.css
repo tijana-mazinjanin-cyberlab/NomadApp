@@ -1,0 +1,7 @@
+f-img {
+  transform: scale(1);
+  transition: .3s ease-in-out;
+}
+f:hover img {
+  transform: scale(1.3);
+}

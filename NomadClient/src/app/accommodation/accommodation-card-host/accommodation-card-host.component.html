@@ -1,0 +1,15 @@
+ <div class="md:w-2/6 h-1/2 md:h-full overflow-hidden">
+      <img [src]="'images/' + accommodation.images[0]"
+         class="object-cover md:w-full md:h-full md:pr-12 rounded-2xl hover:scale-125 transition-all duration-500">
+ </div>
+
+<div class="relative h-full p-8 md:w-3/6 md:h-[250px] h-1/2 pt-3">
+    <p class="font-mono font-bold">{{accommodation.name}}</p>
+    <p class="font-mono text-gray-600">{{accommodation.address}}</p>
+    <p class="text-right text-red-700 w-1/6 pt-5 pr-5 md:hidden">{{accommodation.status}}</p>
+    <button [routerLink]="['/accommodation-create', accommodation.id]"
+            class="absolute bottom-3  p-3 px-24 bg-gray-200 text-nomad-dark font-bold rounded-2xl hover:scale-110 ease-in-out duration-150">Edit</button>
+</div>
+
+<p class="text-right text-red-700 w-1/6 pt-5 pr-5 hidden md:block">{{accommodation.status}}</p>
+

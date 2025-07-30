@@ -1,0 +1,60 @@
+<div class="flex flex-col my-md:flex-row gap-20">
+  <mat-form-field subscriptSizing="dynamic">
+    <mat-label>
+      When</mat-label>
+    <mat-date-range-input [rangePicker]="picker">
+      <input matStartDate placeholder="Start date">
+      <input matEndDate placeholder="End date">
+    </mat-date-range-input>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+    <mat-calendar #calendar [dateClass]="dateClass(this.datesToHighlight)" [selected] = "this.dateRange" (selectedChange)="this.onChange($event)"></mat-calendar>
+  </mat-form-field>
+
+  <div class="">
+    <div class="flex flex-row gap-12 items-center">
+      <div>
+        <label for="basePrice" class="block text-md font-medium leading-6 text-gray-900 font-sans pl-4" >Base price</label>
+        <div class="relative mt-2 rounded-md shadow-sm mb-8 w-[220px]">
+          <input [(ngModel)]="defaultPrice" (change)="onDefaultPriceChange()" type="number" min="1" name="basePrice" id="basePrice" class="block shadow-2xl shadow-gray-400 w-[220px] rounded-md focus:border-gray-300 py-2.5 pl-7 pr-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-nomad-dark sm:text-sm sm:leading-6" placeholder="$">
+        </div>
+      </div>
+
+      <div>
+        <label for="selectedDateprice" class="block text-md font-medium leading-6 text-gray-900 font-sans pl-4" >Price for selected nights</label>
+        <div class="relative mt-2 rounded-md shadow-sm mb-8 w-[220px]">
+          <input [(ngModel)]="intervalPrice" type="number" min="1" name="maxGuest" id="selectedDateprice" class="block shadow-2xl shadow-gray-400 w-[220px] rounded-md focus:border-gray-300 py-2.5 pl-7 pr-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-nomad-dark sm:text-sm sm:leading-6" placeholder="$">
+        </div>
+      </div>
+
+      <button (click)="setPriceForInterval()" class="px-16 py-3 h-fit rounded-2xl shadow-2xl bg-gray-200 text-nomad-dark font-bold hover:bg-gray-300 mr-8">Set Price for selected date range</button>
+    </div>
+
+    <div class="flex gap-40">
+      <div>
+        <input id="FOR_GUEST" name="FOR_GUEST" type="radio" value="FOR_GUEST" class="" (change)="onPriceTypeChange($event)">
+        <label for="FOR_GUEST" class="text-gray-900 text-md font-sans tracking-widest pl-4">Per person</label>
+      </div>
+
+      <div>
+        <input id="FOR_ACCOMMODATION" name="FOR_ACCOMMODATION" type="radio" value="FOR_ACCOMMODATION" class="" (change)="onPriceTypeChange($event)">
+        <label for="FOR_ACCOMMODATION" class="text-gray-900 text-md font-sans tracking-widest pl-4">Per night</label>
+      </div>
+
+    </div>
+
+    <div class="py-6">
+      <input id="conformationType" name="conformationType" type="checkbox" class="" (change)="onConformationTypeChange($event)">
+      <label for="conformationType" class="text-gray-900 text-md font-sans tracking-widest pl-4">Automatically accept reservations</label>
+    </div>
+
+    <button (click)="reset()" class="bg-nomad-dark rounded-full px-4 py-4 mb-6">
+      <i class="fa fa-recycle text-3xl text-white"></i>
+    </button>
+
+    <div>
+      <button (click)="setAvailable()" class="px-16 py-3 rounded-2xl shadow-2xl bg-gray-200 text-nomad-dark font-bold hover:bg-gray-300 mr-8">Set Available</button>
+      <button (click)="setUnavailable()" class="px-16 py-3 rounded-2xl shadow-2xl bg-gray-200 text-nomad-dark font-bold hover:bg-gray-300">Set Unavailable </button>
+    </div>
+  </div>
+
+</div>

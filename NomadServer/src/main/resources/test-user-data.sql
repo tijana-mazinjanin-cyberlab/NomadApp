@@ -1,0 +1,1 @@
+insert into users ("username", "password", "user_type", "verified") values ("host@gmail.com", "hostPassword", "host", true);

@@ -1,0 +1,42 @@
+<ng-container *ngIf="user">
+<p class="text-center font-roboto decoration-1 text-2xl underline-offset-8 tracking-wider underline pt-8 mb-4">Notifications</p>
+
+<div *ngIf="!isGuest" class="flex flex-row gap-12 m-auto w-fit mt-8">
+  <div>
+    <input (click)="onChange($event)" id="NEW_RATING" name="accommodationType" type="checkbox" value="room" class="" checked>
+    <label for="NEW_RATING" class="text-gray-900 text-sm font-sans pl-2">NEW RATING</label>
+  </div>
+
+  <div>
+    <input (click)="onChange($event)" id="NEW_ACCOMMODATION_RATING" name="accommodationType" type="checkbox" value="room" class="" checked>
+    <label for="NEW_ACCOMMODATION_RATING" class="text-gray-900 text-sm font-sans  pl-2">NEW ACCOMMODATION RATING</label>
+  </div>
+
+  <div>
+    <input (click)="onChange($event)" id="NEW_RESERVATION" name="accommodationType" type="checkbox" value="room" class="" checked>
+    <label for="NEW_RESERVATION" class="text-gray-900 text-sm font-sans  pl-2">NEW RESERVATION</label>
+  </div>
+  <div>
+    <input (click)="onChange($event)" id="RESERVATION_CANCELED" name="accommodationType" type="checkbox" value="room" class="" checked>
+    <label for="RESERVATION_CANCELED" class="text-gray-900 text-sm font-sans  pl-2">RESERVATION CANCELED</label>
+  </div>
+</div>
+
+<div *ngIf="isGuest" class="flex flex-row gap-12 m-auto w-fit">
+  <input (click)="onChange($event)" id="REQUEST_RESPONSE" name="accommodationType" type="checkbox" value="room" class="" checked>
+  <label for="REQUEST_RESPONSE" class="text-gray-900 text-sm font-sans  pl-2">REQUEST RESPONSE</label>
+</div>
+
+<div *ngFor="let notification of notifications" class="w-[50%] m-auto mt-8 shadow-lg p-4 flex flex-row gap-5 items-center ">
+  <div>
+    <button class="bg-info-700 rounded-full w-12 h-12">
+      <i class="fa-solid fa-mountain-sun text-white text-lg"></i>
+    </button>
+  </div>
+  <div>
+    <p class="uppercase">{{notification.title}}</p>
+    <p class="text-sm">{{notification.text}}</p>
+    <p class="text-gray-600">{{ formatDate(notification.date) }}</p>
+  </div>
+</div>
+</ng-container>
